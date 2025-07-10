@@ -8,7 +8,7 @@ This function executes a single round of price consensus using the Raft algorith
    >  Updating the price only if a majority agree.
 """
 
-def run_price_consensus(agents, current_price):
+def run_price_consensus(agents):
 
     #------------------Initialize Raft consensus with all agents 
     raft = RaftConsensus(agents)
@@ -17,12 +17,12 @@ def run_price_consensus(agents, current_price):
     leader = raft.elect_leader()
 
     #------------------Proposing a price
-    new_price = raft.propose_price(leader, current_price)
+    new_price = raft.propose_price(leader)
 
     #-----------------Updating the price in the logs if majority agrees
     if raft.reach_consensus(new_price, leader):
         for agent in agents:
             agent.record_price(new_price)
-        return new_price
+        return new_price, leader.agent_id
     else:
-        return current_price  # No consensus
+        return leader.price_opinion, leader.agent_id  # No consensus
