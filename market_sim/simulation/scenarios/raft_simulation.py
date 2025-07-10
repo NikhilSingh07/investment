@@ -12,8 +12,6 @@ It simulates 10 rounds of price consesus using raft algorithm.
   > Vote to reach consensus
   > Update the price if a majority agrees
 
-
-
 """
 
 def run_raft_simulation():
@@ -27,6 +25,11 @@ def run_raft_simulation():
         RaftAgent(agent_id=5, price_opinion=99.5),
     ]
 
+    intial_opinions = []
+
+    for agent in agents:
+      intial_opinions.append(agent.price_opinion) 
+
     agent_prices = []
 
     consensus_price, leader_id = run_price_consensus(agents)
@@ -35,6 +38,7 @@ def run_raft_simulation():
         agent_prices.append(agent.get_final_price())
 
     return {
+        "initial_opinions": intial_opinions,
         "consensus_price": consensus_price,
         "leader_id": leader_id,
         "agent_prices":agent_prices
@@ -42,6 +46,7 @@ def run_raft_simulation():
 
 if __name__ == "__main__":
     result = run_raft_simulation()
+    print("intial_opinions:", result["initial_opinions"])
     print("Consensus Price:", result["consensus_price"])
     print("Leader ID:", result["leader_id"])
     print("Agent Prices:", result["agent_prices"])
