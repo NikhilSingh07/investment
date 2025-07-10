@@ -19,9 +19,9 @@ class RaftConsensus:
         return random.choice(self.agents)
     
     #-------------------Leader proposes a price based on current price
-    def propose_price(self, leader, current_price):
+    def propose_price(self, leader):
         #------------------calling propose_price method from raft_agent class
-        return leader.propose_price(current_price)
+        return leader.propose_price()
 
     def reach_consensus(self, proposed_price, leader):
         votes = []
