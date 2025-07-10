@@ -18,16 +18,30 @@ It simulates 10 rounds of price consesus using raft algorithm.
 
 def run_raft_simulation():
 
-    #----------------Initialising 5 trading agents
-    agents = [RaftAgent(f"Agent {i+1}") for i in range(5)]
-    current_price = 100.0
+    #----------------List of agents with price_opinions
+    agents = [
+        RaftAgent(agent_id=1, price_opinion=101.5),
+        RaftAgent(agent_id=2, price_opinion=100.0),
+        RaftAgent(agent_id=3, price_opinion=102.0),
+        RaftAgent(agent_id=4, price_opinion=101.0),
+        RaftAgent(agent_id=5, price_opinion=99.5),
+    ]
 
+    agent_prices = []
 
-    #----------------Running simulation for 10 rounds
-    for round_num in range(10):
-        print(f"\n🌀 Round {round_num + 1}")
+    consensus_price, leader_id = run_price_consensus(agents)
 
-        #-------------Performing a single round of price consensus
-        consensus_price = run_price_consensus(agents, current_price)
+    for agent in agents:
+        agent_prices.append(agent.get_final_price())
 
-        print(f"Agreed Price: {consensus_price}")
+    return {
+        "consensus_price": consensus_price,
+        "leader_id": leader_id,
+        "agent_prices":agent_prices
+    }    
+
+if __name__ == "__main__":
+    result = run_raft_simulation()
+    print("Consensus Price:", result["consensus_price"])
+    print("Leader ID:", result["leader_id"])
+    print("Agent Prices:", result["agent_prices"])
