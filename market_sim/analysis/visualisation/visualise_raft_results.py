@@ -27,4 +27,7 @@ def visualise_raft_result(result):
     ax.legend()
 
     plt.tight_layout()
+    plt.savefig("raft-consensus-visualisation.png")
     plt.show()
+  
+
