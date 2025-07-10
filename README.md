@@ -32,12 +32,12 @@ The key components added or modified to implement the Raft-style consensus are:
 ![Consensus Plot](raft-consensus-visualisation.png)
 ##  Usage
 
-runs the tests
+runs the test
 ```
 pytest tests/integration/test_raft_consensus.py
 ```
 
-runs the simulations and create visualtion chart
+runs the simulation and create visualisation chart
 ```
 python -m market_sim.simulation.scenarios.raft_simulation
 ```
