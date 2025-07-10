@@ -1,4 +1,4 @@
-from blockchain.consensus.raft import RaftConsensus
+from market_sim.blockchain.consensus.raft import RaftConsensus
 
 """
 This function executes a single round of price consensus using the Raft algorithm:

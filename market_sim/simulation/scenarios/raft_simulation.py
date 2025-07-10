@@ -1,13 +1,14 @@
-from market.agents.raft_agent import RaftAgent
-from market.dynamics.price_consensus import run_price_consensus
+from market_sim.market.agents.raft_agent import RaftAgent
+from market_sim.market.dynamics.price_consensus import run_price_consensus
+from market_sim.analysis.visualisation.visualise_raft_results import visualise_raft_result
 
 """
-Running simple simulation of market price consensus using Raft-like voting, where multiple agents propose
+Running a simulation of market price consensus using Raft-like voting, where multiple agents propose
 and agree on a new price in each round.
 
 It simulates 10 rounds of price consesus using raft algorithm.
 
-  > Elect a leader each round
+  > Elect a leader from the agents/candidates
   > Propose a new market price
   > Vote to reach consensus
   > Update the price if a majority agrees
@@ -18,11 +19,11 @@ def run_raft_simulation():
 
     #----------------List of agents with price_opinions
     agents = [
-        RaftAgent(agent_id=1, price_opinion=101.5),
-        RaftAgent(agent_id=2, price_opinion=100.0),
-        RaftAgent(agent_id=3, price_opinion=102.0),
-        RaftAgent(agent_id=4, price_opinion=101.0),
-        RaftAgent(agent_id=5, price_opinion=99.5),
+        RaftAgent(agent_id=1, price_opinion=8.5),
+        RaftAgent(agent_id=2, price_opinion=10.0),
+        RaftAgent(agent_id=3, price_opinion=12.0),
+        RaftAgent(agent_id=4, price_opinion=11.0),
+        RaftAgent(agent_id=5, price_opinion=9.5),
     ]
 
     intial_opinions = []
@@ -50,3 +51,4 @@ if __name__ == "__main__":
     print("Consensus Price:", result["consensus_price"])
     print("Leader ID:", result["leader_id"])
     print("Agent Prices:", result["agent_prices"])
+    visualise_raft_result(result)
