@@ -2,13 +2,14 @@ import random
 
 class RaftAgent:
     
-    def __init__(self, name):
-        self.name = name  #identifier for the agent
-        self.price_log = []   # empty price logs
+    def __init__(self, agent_id, price_opinion):
+        self.agent_id = agent_id
+        self.price_opinion = price_opinion
+        self.price_log = []
 
-    #-------------------- dummy price: logic is simple, slightly changing from current price
-    def propose_price(self, current_price):
-        return round(current_price + random.uniform(-2.0, 2.0), 2)
+    #-------------------- dummy price: logic is simple, they return their own price opinion
+    def propose_price(self):
+        return self.price_opinion
     
     #--------------------dummy voting: accepts the proposal 80% of the time
     def vote(self, proposed_price):
@@ -17,3 +18,6 @@ class RaftAgent:
     #-------------------recording the price in the logs
     def record_price(self, price):
         self.price_log.append(price)
+
+    def get_final_price(self):
+        return self.price_log[-1] if self.price_log else self.price_opinion
