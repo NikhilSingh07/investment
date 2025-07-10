@@ -1,6 +1,6 @@
 # Raft Style Consensus Implementation (Fork Modification)
 
-I imlemented a raft-style algorithm to overcome the distributed consensus on a fair market price. Each agent proposes a price, and through leader election and majority voting among the agents, a consensus price is determined. 
+I imlemented a raft-style algorithm to establish the distributed consensus on a fair market price. Each agent proposes a price, and through leader election and majority voting among the agents, a consensus price is determined. 
 
 
 ---
